@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ls.sms.dao.StudentCourseMapper">
+  <resultMap id="BaseResultMap" type="com.ls.sms.bean.studentCourse">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="xk_name" jdbcType="VARCHAR" property="xkName" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="student_id" jdbcType="BIGINT" property="studentId" />
+    <result column="course_id" jdbcType="BIGINT" property="courseId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, xk_name, grade, student_id, course_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from studentCourse
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from studentCourse
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ls.sms.bean.studentCourse">
+    insert into studentCourse (id, xk_name, grade, 
+      student_id, course_id)
+    values (#{id,jdbcType=BIGINT}, #{xkName,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, 
+      #{studentId,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ls.sms.bean.studentCourse">
+    insert into studentCourse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="xkName != null">
+        xk_name,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="xkName != null">
+        #{xkName,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ls.sms.bean.studentCourse">
+    update studentCourse
+    <set>
+      <if test="xkName != null">
+        xk_name = #{xkName,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=BIGINT},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ls.sms.bean.studentCourse">
+    update studentCourse
+    set xk_name = #{xkName,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=BIGINT},
+      course_id = #{courseId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAllstudentCourse" resultType="com.ls.sms.bean.studentCourse">
+          select
+          id ,
+          xk_name xkName,
+          grade,
+          student_id studentId,
+          course_id courseId
+          from studentCourse
+  </select>
+</mapper>
